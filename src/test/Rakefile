@@ -2,3 +2,8 @@ task :default => :test
 task :test do
   Dir.glob('./tests/*_test.rb').each { |file| require file}
 end
+
+task :server do
+  # serve static files for use with test suite
+  `ruby -run -ehttpd ./site -p8000`
+end
