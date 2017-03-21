@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
 
+# Gem
 gem 'interlock_automation', path: '../gem'
 
+# Core
 gem 'minitest'
 gem 'rake'
+
+# Selenium
+gem 'chromedriver-helper'
 gem 'selenium-webdriver'

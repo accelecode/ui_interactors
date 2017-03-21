@@ -7,10 +7,19 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    archive-zip (0.7.0)
+      io-like (~> 0.3.0)
     childprocess (0.6.2)
       ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (1.1.0)
+      archive-zip (~> 0.7.0)
+      nokogiri (~> 1.6)
     ffi (1.9.18)
+    io-like (0.3.0)
+    mini_portile2 (2.1.0)
     minitest (5.10.1)
+    nokogiri (1.7.1)
+      mini_portile2 (~> 2.1.0)
     rake (12.0.0)
     rubyzip (1.2.1)
     selenium-webdriver (2.53.4)
@@ -23,6 +32,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chromedriver-helper
   interlock_automation!
   minitest
   rake
