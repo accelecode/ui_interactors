@@ -11,6 +11,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     ffi (1.9.18)
     minitest (5.10.1)
+    rake (12.0.0)
     rubyzip (1.2.1)
     selenium-webdriver (2.53.4)
       childprocess (~> 0.5)
@@ -24,6 +25,7 @@ PLATFORMS
 DEPENDENCIES
   interlock_automation!
   minitest
+  rake
   selenium-webdriver
 
 BUNDLED WITH

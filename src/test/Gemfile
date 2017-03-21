@@ -4,4 +4,5 @@ source "https://rubygems.org"
 gem 'interlock_automation', path: '../gem'
 
 gem 'minitest'
+gem 'rake'
 gem 'selenium-webdriver'
