@@ -1,7 +1,9 @@
 task :default => :test
-task :test do
-  pattern = ARGV[1] || './tests/**/test_*.rb'
-  Dir.glob(pattern).each { |file| require file }
+task :test, [:pattern] do |t, args|
+  pattern = args.fetch(:pattern, './tests/**/test_*.rb')
+  file_paths = Dir.glob(pattern)
+  puts "Files: #{file_paths.sort.join(' ')}"
+  file_paths.each { |file| require_relative(file) }
 end
 
 task :server do
