@@ -1,6 +1,7 @@
 require_relative 'base_interactor'
 require_relative 'action_interactor'
 require_relative 'element_interactor'
+require_relative 'text_field_interactor'
 
 module InterlockAutomation module Interactor class ViewInteractor < BaseInteractor
 
@@ -18,6 +19,10 @@ module InterlockAutomation module Interactor class ViewInteractor < BaseInteract
 
   def element(name)
     ElementInteractor.new(@driver, name, current_xpath)
+  end
+
+  def text_field(name)
+    TextFieldInteractor.new(@driver, name, current_xpath)
   end
 
   private
