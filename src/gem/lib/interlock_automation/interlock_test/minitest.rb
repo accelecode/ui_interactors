@@ -21,4 +21,8 @@ class InterlockTest < Minitest::Test
     @root_view.view(name)
   end
 
+  def action(name)
+    @root_view.action(name)
+  end
+
 end

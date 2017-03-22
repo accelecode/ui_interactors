@@ -1,5 +1,6 @@
 require 'selenium-webdriver'
 require_relative 'base_interactor'
+require_relative 'action_interactor'
 
 module InterlockAutomation module Interactor class ViewInteractor < BaseInteractor
 
@@ -9,6 +10,10 @@ module InterlockAutomation module Interactor class ViewInteractor < BaseInteract
 
   def view(name)
     ViewInteractor.new(@driver, name, current_xpath)
+  end
+
+  def action(name)
+    ActionInteractor.new(@driver, name, current_xpath)
   end
 
   private
