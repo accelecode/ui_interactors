@@ -1,4 +1,4 @@
-require_relative '../base_test'
+require_relative '../../base_test'
 
 class TestViewInteractor < BaseTest
 
