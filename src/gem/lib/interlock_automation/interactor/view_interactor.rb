@@ -28,7 +28,7 @@ module InterlockAutomation module Interactor class ViewInteractor < BaseInteract
   private
 
   def current_xpath
-    (@name ? "#{@xpath_root}/*[@data-view='#{@name}']" : @xpath_root)
+    (@name ? "#{@xpath_root}//*[@data-view='#{@name}']" : @xpath_root)
   end
 
 end end end

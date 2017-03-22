@@ -32,7 +32,7 @@ module InterlockAutomation module Interactor class TextFieldInteractor < BaseInt
   private
 
   def current_xpath
-    "#{@xpath_root}/*[@name='#{@name}']"
+    "#{@xpath_root}//*[@name='#{@name}']"
   end
 
 end end end

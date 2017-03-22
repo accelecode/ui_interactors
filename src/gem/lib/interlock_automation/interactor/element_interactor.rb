@@ -17,7 +17,7 @@ module InterlockAutomation module Interactor class ElementInteractor < BaseInter
   private
 
   def current_xpath
-    "#{@xpath_root}/*[@data-element='#{@name}']"
+    "#{@xpath_root}//*[@data-element='#{@name}']"
   end
 
 end end end

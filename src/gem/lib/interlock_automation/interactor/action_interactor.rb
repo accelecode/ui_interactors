@@ -13,7 +13,7 @@ module InterlockAutomation module Interactor class ActionInteractor < BaseIntera
   private
 
   def current_xpath
-    "#{@xpath_root}/*[@data-action='#{@name}']"
+    "#{@xpath_root}//*[@data-action='#{@name}']"
   end
 
 end end end
