@@ -7,7 +7,7 @@ class BaseTest < InterlockTest
 
   def setup
     super
-    @ui_steps ||= UiSteps.new(driver)
+    @ui_steps ||= UiSteps.new(driver, root_view)
   end
 
 end

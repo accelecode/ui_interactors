@@ -1,9 +1,10 @@
 class UiSteps
 
-  attr_reader :driver
+  attr_reader :driver, :root_view
 
-  def initialize(driver)
+  def initialize(driver, root_view)
     @driver = driver
+    @root_view = root_view
   end
 
   def navigate_to_home

@@ -4,7 +4,7 @@ require 'interlock_automation/interactor/view_interactor'
 
 class InterlockTest < Minitest::Test
 
-  attr_reader :driver
+  attr_reader :driver, :root_view
 
   def setup
     super
@@ -18,11 +18,11 @@ class InterlockTest < Minitest::Test
   end
 
   def view(name)
-    @root_view.view(name)
+    root_view.view(name)
   end
 
   def action(name)
-    @root_view.action(name)
+    root_view.action(name)
   end
 
 end
