@@ -9,13 +9,16 @@ module InterlockAutomation module Interactor class BaseInteractor
   end
 
   def is_visible!
-    wait.until { @driver.find_elements(xpath: current_xpath).count == 1 }
+    wait.until { @driver.find_element(xpath: current_xpath).displayed? }
   rescue
     raise("xpath is not visible: #{current_xpath}")
   end
 
   def is_not_visible!
-    wait.until { @driver.find_elements(xpath: current_xpath).count == 0 }
+    wait.until do
+      elements = @driver.find_elements(xpath: current_xpath)
+      elements.count == 0 || elements.map(&:displayed?).none?
+    end
   rescue
     raise("xpath is visible: #{current_xpath}")
   end
