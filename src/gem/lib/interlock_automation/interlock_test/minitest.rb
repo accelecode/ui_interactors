@@ -1,8 +1,10 @@
 require 'minitest/autorun'
+require 'forwardable'
 require 'selenium-webdriver'
 require 'interlock_automation/interactor/view_interactor'
 
 class InterlockTest < Minitest::Test
+  extend Forwardable
 
   attr_reader :driver, :root_view
 
@@ -17,16 +19,6 @@ class InterlockTest < Minitest::Test
     driver.quit
   end
 
-  def view(name)
-    root_view.view(name)
-  end
-
-  def action(name)
-    root_view.action(name)
-  end
-
-  def element(name)
-    root_view.element(name)
-  end
+  def_delegators :root_view, :view, :action, :element
 
 end
