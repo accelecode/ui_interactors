@@ -9,14 +9,14 @@ module InterlockAutomation module Interactor class BaseInteractor
   def is_visible!
     wait = Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2)
     wait.until { @driver.find_elements(xpath: current_xpath).count == 1 }
-  rescue => e
+  rescue
     raise("xpath is not visible: #{current_xpath}")
   end
 
   def is_not_visible!
     wait = Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2)
     wait.until { @driver.find_elements(xpath: current_xpath).count == 0 }
-  rescue => e
+  rescue
     raise("xpath is visible: #{current_xpath}")
   end
 
