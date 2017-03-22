@@ -19,6 +19,6 @@ class InterlockTest < Minitest::Test
     driver.quit
   end
 
-  def_delegators :root_view, :view, :action, :element, :text_field, :dropdown_field
+  def_delegators :root_view, :view, :action, :element, :text_field, :dropdown_field, :checkbox_field
 
 end

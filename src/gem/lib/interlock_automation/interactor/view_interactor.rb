@@ -3,6 +3,7 @@ require_relative 'action_interactor'
 require_relative 'element_interactor'
 require_relative 'text_field_interactor'
 require_relative 'dropdown_field_interactor'
+require_relative 'checkbox_field_interactor'
 
 module InterlockAutomation module Interactor class ViewInteractor < BaseInteractor
 
@@ -28,6 +29,10 @@ module InterlockAutomation module Interactor class ViewInteractor < BaseInteract
 
   def dropdown_field(name)
     DropdownFieldInteractor.new(@driver, name, current_xpath)
+  end
+
+  def checkbox_field(name)
+    CheckboxFieldInteractor.new(@driver, name, current_xpath)
   end
 
   private
