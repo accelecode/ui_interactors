@@ -1,4 +1,3 @@
-require 'selenium-webdriver'
 require_relative 'base_interactor'
 
 module InterlockAutomation module Interactor class ActionInteractor < BaseInteractor

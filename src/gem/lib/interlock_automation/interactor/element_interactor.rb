@@ -1,4 +1,3 @@
-require 'selenium-webdriver'
 require_relative 'base_interactor'
 
 module InterlockAutomation module Interactor class ElementInteractor < BaseInteractor
@@ -8,12 +7,10 @@ module InterlockAutomation module Interactor class ElementInteractor < BaseInter
   end
 
   def has_text!(text)
-    wait = Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2)
     wait.until { find_element.text == text }
   end
 
   def does_not_have_text!(text)
-    wait = Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2)
     wait.until { find_element.text != text }
   end
 

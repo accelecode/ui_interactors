@@ -1,4 +1,3 @@
-require 'selenium-webdriver'
 require_relative 'base_interactor'
 require_relative 'action_interactor'
 require_relative 'element_interactor'
