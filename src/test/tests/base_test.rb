@@ -1,4 +1,4 @@
-require 'interlock_automation/interlock_test/minitest'
+require 'interlock_automation/minitest/interlock_test'
 require_relative 'ui_steps'
 
 class BaseTest < InterlockTest
