@@ -1,10 +1,3 @@
-require_relative 'base_interactor'
-require_relative 'action_interactor'
-require_relative 'element_interactor'
-require_relative 'text_field_interactor'
-require_relative 'dropdown_field_interactor'
-require_relative 'checkbox_field_interactor'
-
 module InterlockAutomation module Interactor class ViewInteractor < BaseInteractor
 
   def initialize(driver, name=nil, xpath_root='//*')
@@ -21,6 +14,10 @@ module InterlockAutomation module Interactor class ViewInteractor < BaseInteract
 
   def element(name)
     ElementInteractor.new(@driver, name, current_xpath)
+  end
+
+  def list(name)
+    ListInteractor.new(@driver, name, current_xpath)
   end
 
   def text_field(name)

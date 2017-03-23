@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'forwardable'
 require 'selenium-webdriver'
-require 'interlock_automation/interactor/view_interactor'
+require 'interlock_automation'
 
 class InterlockTest < Minitest::Test
   extend Forwardable
@@ -19,6 +19,6 @@ class InterlockTest < Minitest::Test
     driver.quit
   end
 
-  def_delegators :root_view, :view, :action, :element, :text_field, :dropdown_field, :checkbox_field
+  def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field
 
 end

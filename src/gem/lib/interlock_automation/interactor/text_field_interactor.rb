@@ -1,5 +1,3 @@
-require_relative 'base_interactor'
-
 module InterlockAutomation module Interactor class TextFieldInteractor < BaseInteractor
 
   def initialize(driver, name, xpath_root='//*')
