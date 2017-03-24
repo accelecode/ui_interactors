@@ -6,6 +6,7 @@ gem 'interactor_ui_automation', path: '../gem'
 
 # Core
 gem 'minitest'
+gem 'minitest-hooks'
 gem 'rake'
 
 # Selenium

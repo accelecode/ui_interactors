@@ -14,11 +14,6 @@ module InteractorUIAutomation class InteractorTest < Minitest::Test
     @root_view = InteractorUIAutomation::Interactor::ViewInteractor.new(@driver)
   end
 
-  def teardown
-    super
-    driver and driver.quit
-  end
-
   def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field
 
   def provide_driver
