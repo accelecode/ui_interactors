@@ -1,9 +1,9 @@
 require 'minitest/autorun'
 require 'forwardable'
 require 'selenium-webdriver'
-require 'interlock_automation'
+require 'interactor_ui_automation'
 
-class InterlockTest < Minitest::Test
+module InteractorUIAutomation class InteractorTest < Minitest::Test
   extend Forwardable
 
   attr_reader :driver, :root_view
@@ -11,7 +11,7 @@ class InterlockTest < Minitest::Test
   def setup
     super
     @driver ||= Selenium::WebDriver.for(:chrome)
-    @root_view = InterlockAutomation::Interactor::ViewInteractor.new(@driver)
+    @root_view = InteractorUIAutomation::Interactor::ViewInteractor.new(@driver)
   end
 
   def teardown
@@ -21,4 +21,4 @@ class InterlockTest < Minitest::Test
 
   def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field
 
-end
+end end

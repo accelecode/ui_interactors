@@ -1,4 +1,4 @@
-module InterlockAutomation module Interactor class ViewInteractor < BaseInteractor
+module InteractorUIAutomation module Interactor class ViewInteractor < BaseInteractor
 
   def initialize(driver, name=nil, xpath_root='//*')
     super

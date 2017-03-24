@@ -1,7 +1,7 @@
-require 'interlock_automation/minitest/interlock_test'
+require 'interactor_ui_automation/minitest/interactor_test'
 require_relative 'ui_steps'
 
-class BaseTest < InterlockTest
+class BaseTest < InteractorUIAutomation::InteractorTest
 
   attr_reader :ui_steps
 

@@ -1,2 +1,0 @@
-require_relative 'interlock_automation/version'
-require_relative 'interlock_automation/interactor'

@@ -1,0 +1,2 @@
+require_relative 'interactor_ui_automation/version'
+require_relative 'interactor_ui_automation/interactor'

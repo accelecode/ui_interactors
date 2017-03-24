@@ -1,7 +1,7 @@
 PATH
   remote: ../gem
   specs:
-    interlock_automation (0.1.0)
+    interactor_ui_automation (0.1.0)
       selenium-webdriver (~> 2.52)
 
 GEM
@@ -33,7 +33,7 @@ PLATFORMS
 
 DEPENDENCIES
   chromedriver-helper
-  interlock_automation!
+  interactor_ui_automation!
   minitest
   rake
   selenium-webdriver

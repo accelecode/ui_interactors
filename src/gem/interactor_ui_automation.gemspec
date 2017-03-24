@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'interlock_automation/version'
+require 'interactor_ui_automation/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "interlock_automation"
-  spec.version       = InterlockAutomation::VERSION
+  spec.name          = "interactor_ui_automation"
+  spec.version       = InteractorUIAutomation::VERSION
   spec.authors       = ["Kevin Rood"]
   spec.email         = ["kevin.rood@accelecode.com"]
 
   spec.summary       = %q{Write browser test automation using a series of conventions.}
   spec.description   = %q{Write browser test automation using a series of conventions.}
-  spec.homepage      = "https://github.com/accelecode/interlock_automation"
+  spec.homepage      = "https://github.com/accelecode/interactor_ui_test_automation"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.

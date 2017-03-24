@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 # Gem
-gem 'interlock_automation', path: '../gem'
+gem 'interactor_ui_automation', path: '../gem'
 
 # Core
 gem 'minitest'

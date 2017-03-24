@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 
-module InterlockAutomation module Interactor class BaseInteractor
+module InteractorUIAutomation module Interactor class BaseInteractor
 
   def initialize(driver, name=nil, xpath_root='//*')
     @driver = driver

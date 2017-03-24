@@ -1,13 +1,13 @@
-# InterlockAutomation
+# Interactor UI Automation
 
-InterlockAutomation makes it easy to write browser test automation using a series of conventions for selecting various types of elements.
+**Interactor UI Automation** makes it easy to automate browser interaction using a series of conventions for selecting and interacting with various types of elements.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'interlock_automation'
+gem 'interactor_ui_automation'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install interlock_automation
+    $ gem install interactor_ui_automation
 
 ## Usage
 
@@ -30,4 +30,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/accelecode/interlock_automation.
+Bug reports and pull requests are welcome on GitHub at [interactor_ui_automation](https://github.com/accelecode/interactor_ui_automation).
