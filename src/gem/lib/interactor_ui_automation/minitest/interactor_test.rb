@@ -10,15 +10,19 @@ module InteractorUIAutomation class InteractorTest < Minitest::Test
 
   def setup
     super
-    @driver ||= Selenium::WebDriver.for(:chrome)
+    @driver = provide_driver
     @root_view = InteractorUIAutomation::Interactor::ViewInteractor.new(@driver)
   end
 
   def teardown
     super
-    driver.quit
+    driver and driver.quit
   end
 
   def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field
+
+  def provide_driver
+    raise('Subclass must define `#provide_driver()`')
+  end
 
 end end

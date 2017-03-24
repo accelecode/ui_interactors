@@ -10,4 +10,8 @@ class BaseTest < InteractorUIAutomation::InteractorTest
     @ui_steps ||= UiSteps.new(driver, root_view)
   end
 
+  def provide_driver
+    Selenium::WebDriver.for(:chrome)
+  end
+
 end
