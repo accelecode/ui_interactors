@@ -1,5 +1,15 @@
 task :default => :test
 task :test, [:pattern] do |t, args|
+  # start shared driver instance
+  require_relative './tests/driver_provider'
+  driver = DriverProvider.instance.driver
+  # terminate shared driver instance after tests complete
+  require 'minitest'
+  Minitest.after_run do
+    driver.quit
+  end
+
+  # register tests to execute (via Minitest#autorun) at process exit
   pattern = args.fetch(:pattern, './tests/**/test_*.rb')
   file_paths = Dir.glob(pattern)
   puts "Files: #{file_paths.sort.join(' ')}"
