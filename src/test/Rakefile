@@ -1,4 +1,8 @@
-task :default => :test
+task :server do
+  # serve static files for use with test suite
+  `ruby -run -ehttpd ./site -p8000`
+end
+
 task :test, [:pattern] do |t, args|
   # start shared driver instance
   require_relative './tests/driver_provider'
@@ -16,7 +20,4 @@ task :test, [:pattern] do |t, args|
   file_paths.each { |file| require_relative(file) }
 end
 
-task :server do
-  # serve static files for use with test suite
-  `ruby -run -ehttpd ./site -p8000`
-end
+task default: :test
