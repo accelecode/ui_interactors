@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kevin Rood"]
   spec.email         = ["kevin.rood@accelecode.com"]
 
-  spec.summary       = %q{Write browser test automation using a series of conventions.}
-  spec.description   = %q{Write browser test automation using a series of conventions.}
+  spec.summary       = %q{Write selenium-webdriver browser automation using a series of conventions.}
+  spec.description   = %q{Write selenium-webdriver browser automation using a series of conventions.}
   spec.homepage      = "https://github.com/accelecode/interactor_ui_test_automation"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
