@@ -1,6 +1,6 @@
 # Interactor UI Automation
 
-**Interactor UI Automation** makes it easy to automate browser interaction using a series of conventions for selecting and interacting with various types of elements.
+**Interactor UI Automation** makes it easy to automate browser interaction using selenium-webdriver by following a series of conventions for selecting and interacting with various types of elements.
 
 ## Installation
 
