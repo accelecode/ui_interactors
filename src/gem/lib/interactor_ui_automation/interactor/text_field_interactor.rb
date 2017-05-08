@@ -24,7 +24,7 @@ module InteractorUIAutomation module Interactor class TextFieldInteractor < Base
   end
 
   def clear_text
-    find_element.clear
+    find_element.send_keys([:control, 'a'], :delete)
   end
 
   private
