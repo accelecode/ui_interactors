@@ -40,7 +40,6 @@ module InteractorUIAutomation module Interactor class BaseInteractor
   def find_element
     is_visible!
 
-    wait = Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2)
     wait.until { @driver.find_element(xpath: current_xpath) }
   end
 
