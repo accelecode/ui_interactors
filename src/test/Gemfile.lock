@@ -1,7 +1,7 @@
 PATH
   remote: ../gem
   specs:
-    interactor_ui_automation (0.1.0)
+    interactor_ui_automation (0.1.2)
       selenium-webdriver (~> 2.52)
 
 GEM
