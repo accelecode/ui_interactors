@@ -30,7 +30,11 @@ module InteractorUIAutomation module Interactor class BaseInteractor
   end
 
   def wait
-    Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2)
+    ignored_errors = [
+      Selenium::WebDriver::Error::NoSuchElementError,
+      Selenium::WebDriver::Error::StaleElementReferenceError
+    ]
+    Selenium::WebDriver::Wait.new(timeout: 5, interval: 0.2, ignore: ignored_errors)
   end
 
   def find_element
