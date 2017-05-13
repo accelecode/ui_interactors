@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'interactor_ui_automation/version'
+require 'ui_interactors/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "interactor_ui_automation"
-  spec.version       = InteractorUIAutomation::VERSION
+  spec.name          = "ui_interactors"
+  spec.version       = UiInteractors::VERSION
   spec.authors       = ["Kevin Rood"]
   spec.email         = ["kevin.rood@accelecode.com"]
 

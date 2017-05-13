@@ -1,4 +1,4 @@
-module InteractorUIAutomation module Interactor class ActionInteractor < BaseInteractor
+module UiInteractors module Interactor class ActionInteractor < BaseInteractor
 
   def initialize(driver, name, xpath_root='//*')
     super

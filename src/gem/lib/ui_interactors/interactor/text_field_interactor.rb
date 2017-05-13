@@ -1,4 +1,4 @@
-module InteractorUIAutomation module Interactor class TextFieldInteractor < BaseInteractor
+module UiInteractors module Interactor class TextFieldInteractor < BaseInteractor
 
   def initialize(driver, name, xpath_root='//*')
     super

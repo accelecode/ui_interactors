@@ -1,9 +1,9 @@
 require 'minitest/autorun'
 require 'forwardable'
 require 'selenium-webdriver'
-require 'interactor_ui_automation'
+require 'ui_interactors'
 
-module InteractorUIAutomation class InteractorTest < Minitest::Test
+module UiInteractors class InteractorTest < Minitest::Test
   extend Forwardable
 
   attr_reader :driver, :root_view
@@ -11,7 +11,7 @@ module InteractorUIAutomation class InteractorTest < Minitest::Test
   def setup
     super
     @driver = provide_driver
-    @root_view = InteractorUIAutomation::Interactor::ViewInteractor.new(@driver)
+    @root_view = UiInteractors::Interactor::ViewInteractor.new(@driver)
   end
 
   def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field

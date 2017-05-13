@@ -1,4 +1,4 @@
-module InteractorUIAutomation module Interactor class RowInteractor < ViewInteractor
+module UiInteractors module Interactor class RowInteractor < ViewInteractor
 
   def initialize(driver, selector_options, xpath_root='//*')
     super(driver, nil, xpath_root)

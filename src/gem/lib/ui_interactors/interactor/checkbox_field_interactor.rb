@@ -1,4 +1,4 @@
-module InteractorUIAutomation module Interactor class CheckboxFieldInteractor < BaseInteractor
+module UiInteractors module Interactor class CheckboxFieldInteractor < BaseInteractor
 
   def initialize(driver, name, xpath_root='//*')
     super

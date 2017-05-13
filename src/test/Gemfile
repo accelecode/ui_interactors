@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 # Gem
-gem 'interactor_ui_automation', path: '../gem'
+gem 'ui_interactors', path: '../gem'
 
 # Core
 gem 'minitest'
