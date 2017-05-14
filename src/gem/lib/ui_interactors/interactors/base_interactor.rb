@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 
-module UiInteractors module Interactor class BaseInteractor
+module UiInteractors module Interactors class BaseInteractor
 
   def initialize(driver, name=nil, xpath_root='//*')
     @driver = driver

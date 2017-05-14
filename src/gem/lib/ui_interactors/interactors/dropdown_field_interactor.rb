@@ -1,4 +1,4 @@
-module UiInteractors module Interactor class DropdownFieldInteractor < BaseInteractor
+module UiInteractors module Interactors class DropdownFieldInteractor < BaseInteractor
 
   def initialize(driver, name, xpath_root='//*')
     super

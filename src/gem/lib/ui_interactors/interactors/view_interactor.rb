@@ -1,4 +1,4 @@
-module UiInteractors module Interactor class ViewInteractor < BaseInteractor
+module UiInteractors module Interactors class ViewInteractor < BaseInteractor
 
   def initialize(driver, name=nil, xpath_root='//*')
     super

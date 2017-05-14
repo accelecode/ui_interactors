@@ -11,7 +11,7 @@ module UiInteractors class InteractorTest < Minitest::Test
   def setup
     super
     @driver = provide_driver
-    @root_view = UiInteractors::Interactor::ViewInteractor.new(@driver)
+    @root_view = UiInteractors::Interactors::ViewInteractor.new(@driver)
   end
 
   def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field
