@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Write selenium-webdriver browser automation using a series of conventions.}
   spec.description   = %q{Write selenium-webdriver browser automation using a series of conventions.}
-  spec.homepage      = "https://github.com/accelecode/interactor_ui_test_automation"
+  spec.homepage      = "https://github.com/accelecode/ui_interactors"
   spec.license       = "Apache-2.0"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
