@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+#### Example: Sign In Form
+
 Consider a simple example: automating the sign in process for a typical web application.
 
 Here is the `HTML` generated for the sign in form:
@@ -73,8 +75,6 @@ class TestSignInSuccess < UiInteractors::InteractorTest
 end
 ```
 
-We used `minitest` for our example, but that is not required. You can use any test framework you want - or, no test framework at all. However, there is a special level of support provided by the gem for `minitest`.
-
 The beauty of this approach is that style changes to the sign in form will **not** cause test failures. This is because the attribute-based approach used to select, interact with and test visibility of elements is resistant to style changes.
 
 For example, the same test would pass for this sign in form with more elements and also styled with `bootstrap` CSS:
@@ -110,6 +110,10 @@ For example, the same test would pass for this sign in form with more elements a
   </div>
 </div>
 ```
+
+#### minitest
+
+The example above uses `minitest`. However, `minitest` is not required. You can use any test framework you want, or no test framework at all. However, there is a special level of support provided by the gem for `minitest`. The test base class defines a root view (an unnamed view). Inside the test, references to interactors are forwarded to the root view (`view`, `action`, `element`, `list`, `text_field`, `dropdown_field`, `checkbox_field`). As such, we can use code like this directly in the test `view('dashboard').is_not_visible!`. `view` is being forwarded to the root view, which is acting as a default scope.
 
 ## Development
 
