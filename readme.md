@@ -20,7 +20,96 @@ Or install it yourself as:
 
 ## Usage
 
-TODO
+Consider a simple example: automating the sign in process for a typical web application.
+
+Here is the `HTML` generated for the sign in form:
+
+```html
+<div data-view="sign-in">
+  <div>
+    <label for="email">Email</label>
+    <input type="text" name="email" value="">
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" value="">
+  </div>
+  <button type="submit" data-action="submit">Sign In</button>
+</div>
+```
+
+Here is the important part of the `HTML` we expect to see on the authenticated home page/dashboard page: 
+
+```html
+<div data-view="dashboard">
+</div>
+```
+
+And finally, this is the `Ruby` we expect to write to automate the sign in process:
+
+```ruby
+require 'ui_interactors/minitest/interactor_test'
+
+class TestSignInSuccess < UiInteractors::InteractorTest
+
+  def provide_driver
+    DriverProvider.instance.driver
+  end
+
+  def test_successful_sign_in
+    view('dashboard').is_not_visible!
+
+    view('sign-in').tap do |v|
+      v.is_visible!
+      v.text_field('email').enter_text('a7a80644@d9c4d54f.5a0')
+      v.text_field('password').enter_text('57bc8f19c898')
+      v.action('submit').activate
+      v.is_not_visible!
+    end
+
+    view('dashboard').is_visible!
+  end
+
+end
+```
+
+We used `minitest` for our example, but that is not required. You can use any test framework you want - or, no test framework at all. However, there is a special level of support provided by the gem for `minitest`.
+
+The beauty of this approach is that style changes to the sign in form will **not** cause test failures. This is because the attribute-based approach used to select, interact with and test visibility of elements is resistant to style changes.
+
+For example, the same test would pass for this sign in form with more elements and also styled with `bootstrap` CSS:
+
+```html
+<div class="panel panel-default" data-view="sign-in">
+  <div class="panel-heading">Please Sign In</div>
+  <div class="panel-body">
+    <form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="field">
+          <input type="text" name="email" class="form-control" value="">
+        </div>
+      </div>
+      <div class="form-group ">
+        <label for="password">Password</label>
+        <div class="field">
+          <input type="password" name="password" class="form-control" value="">
+        </div>
+      </div>
+      <div class="text-right">
+        <button data-action="forgot-password" type="button" class="btn btn-link"
+                style="font-size: 12px; padding: 0px 0px 10px;">Forgot Password?
+        </button>
+      </div>
+      <button type="submit" data-action="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+      <div class="lined-header">
+        <hr>
+        <span>Don't have an account?</span></div>
+      <button data-action="sign-up" type="button" class="btn btn-default" style="width: 100%;">Sign Up</button>
+    </form>
+  </div>
+</div>
+```
 
 ## Development
 
