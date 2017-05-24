@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kevin Rood"]
   spec.email         = ["kevin.rood@accelecode.com"]
 
-  spec.summary       = %q{Write selenium-webdriver browser automation using a series of conventions.}
-  spec.description   = %q{Write selenium-webdriver browser automation using a series of conventions.}
+  spec.summary       = %q{ui_interactors makes it simple to write automated browser tests using selenium-webdriver - tests which are resilient to HTML structure and style changes.}
+  spec.description   = %q{ui_interactors makes it simple to write automated browser tests using selenium-webdriver - tests which are resilient to HTML structure and style changes.}
   spec.homepage      = "https://github.com/accelecode/ui_interactors"
   spec.license       = "Apache-2.0"
 
