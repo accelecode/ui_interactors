@@ -20,6 +20,74 @@ Or install it yourself as:
 
 ## Usage
 
+#### Overview
+
+Use **interactors** to select, interact and test visibility of elements. The goal of the `ui_interactors` gem is to allow you to write simple `Ruby` code like this to automate functional testing of web applications - testing that is resilient to `HTML` layout changes and `CSS` style changes:
+
+```ruby
+view('dashboard').is_not_visible!
+
+view('sign-in').tap do |v|
+  v.is_visible!
+  v.text_field('email').enter_text('a7a80644@d9c4d54f.5a0')
+  v.text_field('password').enter_text('57bc8f19c898')
+  v.action('submit').activate
+  v.is_not_visible!
+end
+
+view('dashboard').is_visible!
+```
+
+For further discussion of this example code, please see the section below titled **Example: Sign In Form**.
+
+Element selection is based on using a series of conventions for HTML attribute name/value pairs. The attribute name is used to identify the type of element being interacted with (view, form field, etc). The attribute value is used to identify the specific element.
+
+For example, views which contain other elements are identified by the `HTML` attribute `data-view`. The associated attribute value is the name of the view. In `<div data-view='dashboard'></div>`, *dashboard* is the view name.
+
+### Interactors
+
+### `ViewInteractor`
+
+The `ViewInteractor` is used primarily to work with elements that have children (a container element).
+
+A `ViewInteractor` allows you to perform three operations: (1) ensure the `view` is *visible*, (2) ensure the view is *invisible* and (3) *select* child elements.
+
+*Methods*
+
+Two core methods are provided to check element visibility.
+
+`#is_visible!` - ensure the view is visible.
+
+`#is_not_visible!` - ensure the view is not visible.
+
+The remaining methods are used to select child elements via interactors scoped to the current `view`.
+
+`#view(name)` - returns a `ViewInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
+
+`#action(name)` - returns an `ActionInteractor` representing a child element with the `data-action` attribute value corresponding to `name` (`<element data-action='name' />`).
+
+`#element(name)` - returns an `ElementInteractor` representing a child element with the `data-element` attribute value corresponding to `name` (`<element data-element='name' />`).
+
+`#list(name)` - returns a `ListInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
+
+`#text_field(name)` - returns a `TextFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
+
+`#dropdown_field(name)` - returns a `DropdownFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
+
+`#checkbox_field(name)` - returns a `CheckboxFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
+
+### `ElementInteractor`
+
+### `ActionInteractor`
+
+### `interactor `
+
+### `TextFieldInteractor`
+
+### `DropdownFieldInteractor`
+
+### `CheckboxFieldInteractor`
+
 #### Example: Sign In Form
 
 Consider a simple example: automating the sign in process for a typical web application.
