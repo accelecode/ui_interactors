@@ -204,6 +204,14 @@ Check `HTML` element visibility.
 * `#is_visible!` - ensure the `HTML` element is visible.
 * `#is_not_visible!` - ensure the `HTML` element is not visible.
 
+Select a row.
+
+* `#row(selector_options)` - uses the given `selector_options` to select a row (return a `RowInteractor`). `selector_options` is a `Hash` which expects a single key/value pair with the key `:elements`. The value for `:elements` is a `Hash` that describes the element names and values which identify a row. Row `HTML` elements are children of the list `HTML` element. Row `HTML` elements follow the special attribute naming convention `data-view='row'`. These row `HTML` elements are then matched using the given `:elements` `Hash`. For example this `selector_options` value, `{elements: {firstName: 'John', lastName: 'Doe'}}`, would match a row with the two `data-element` elements described (`<div data-view='row'><span data-element='firstName'>John</span><span data-element='lastName'>Doe</span></div>`). Note that the row would then be treated as a `ViewInteractor` allowing you to find and interact with other views, elements, fields, actions, etc.
+
+### `RowInteractor`
+
+A `RowInteractor` is a special case of a `ViewInteractor`. Please refer to the reference for `ViewInteractor`. You build a `RowInteractor` using `ListInteractor#row`.
+
 ### `TextFieldInteractor`
 
 *Methods*
