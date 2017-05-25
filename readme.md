@@ -153,39 +153,74 @@ A `ViewInteractor` allows you to perform three operations: (1) ensure the `view`
 
 *Methods*
 
-Two core methods are provided to check element visibility.
+Check `HTML` element visibility.
 
-`#is_visible!` - ensure the view is visible.
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
 
-`#is_not_visible!` - ensure the view is not visible.
+Select child elements via interactors scoped to the current `view`.
 
-The remaining methods are used to select child elements via interactors scoped to the current `view`.
-
-`#view(name)` - returns a `ViewInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
-
-`#action(name)` - returns an `ActionInteractor` representing a child element with the `data-action` attribute value corresponding to `name` (`<element data-action='name' />`).
-
-`#element(name)` - returns an `ElementInteractor` representing a child element with the `data-element` attribute value corresponding to `name` (`<element data-element='name' />`).
-
-`#list(name)` - returns a `ListInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
-
-`#text_field(name)` - returns a `TextFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
-
-`#dropdown_field(name)` - returns a `DropdownFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
-
-`#checkbox_field(name)` - returns a `CheckboxFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
+* `#view(name)` - returns a `ViewInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
+* `#action(name)` - returns an `ActionInteractor` representing a child element with the `data-action` attribute value corresponding to `name` (`<element data-action='name' />`).
+* `#element(name)` - returns an `ElementInteractor` representing a child element with the `data-element` attribute value corresponding to `name` (`<element data-element='name' />`).
+* `#list(name)` - returns a `ListInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
+* `#text_field(name)` - returns a `TextFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
+* `#dropdown_field(name)` - returns a `DropdownFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
+* `#checkbox_field(name)` - returns a `CheckboxFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
 
 ### `ElementInteractor`
 
+*Methods*
+
+Check `HTML` element visibility.
+
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
+
 ### `ActionInteractor`
 
-### `interactor `
+*Methods*
+
+Check `HTML` element visibility.
+
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
+
+### `ListInteractor`
+
+*Methods*
+
+Check `HTML` element visibility.
+
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
 
 ### `TextFieldInteractor`
 
+*Methods*
+
+Check `HTML` element visibility.
+
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
+
 ### `DropdownFieldInteractor`
 
+*Methods*
+
+Check `HTML` element visibility.
+
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
+
 ### `CheckboxFieldInteractor`
+
+*Methods*
+
+Check `HTML` element visibility.
+
+* `#is_visible!` - ensure the `HTML` element is visible.
+* `#is_not_visible!` - ensure the `HTML` element is not visible.
 
 ## Development
 
