@@ -177,6 +177,11 @@ Check `HTML` element visibility.
 * `#is_visible!` - ensure the `HTML` element is visible.
 * `#is_not_visible!` - ensure the `HTML` element is not visible.
 
+Check for the text contained in the `HTML` element.
+
+* `has_text!(text)` - ensure the element has the given text.
+* `does_not_have_text!(text)` - ensure the element does not have the given text.
+
 ### `ActionInteractor`
 
 *Methods*
@@ -185,6 +190,10 @@ Check `HTML` element visibility.
 
 * `#is_visible!` - ensure the `HTML` element is visible.
 * `#is_not_visible!` - ensure the `HTML` element is not visible.
+
+Interact with the action.
+
+* `#activate` - invoke the action (click on the `HTML` element).
 
 ### `ListInteractor`
 
@@ -204,6 +213,14 @@ Check `HTML` element visibility.
 * `#is_visible!` - ensure the `HTML` element is visible.
 * `#is_not_visible!` - ensure the `HTML` element is not visible.
 
+Interact with the text field.
+
+* `#has_text!(text)` - ensure the input has the given text.
+* `#does_not_have_text!(text)` - ensure the input does not have the given text.
+* `#is_blank!` - ensure the input is empty (that it does not have any text).
+* `#enter_text(text)` - enter text in the input. Any existing value is cleared.
+* `#clear_text` - uses `<ctrl>` + `a`, `<delete>` to clear text. This approach of clearing text triggers React's change event. 
+
 ### `DropdownFieldInteractor`
 
 *Methods*
@@ -213,6 +230,14 @@ Check `HTML` element visibility.
 * `#is_visible!` - ensure the `HTML` element is visible.
 * `#is_not_visible!` - ensure the `HTML` element is not visible.
 
+Interact with the select.
+
+* `#option_is_selected!(option_name)` - ensure option with given text visible to the user (`option_name`) is selected.
+* `#option_is_not_selected!(option_name)` - ensure option with given text visible to the user (`option_name`) is not selected.
+* `#empty_option_is_selected!` - ensure option with no text is selected.
+* `#select_option(option_name)` - select an option with the given text visible to the user (`option_name`).
+* `#select_empty_option` - select an option which has no text.
+
 ### `CheckboxFieldInteractor`
 
 *Methods*
@@ -221,6 +246,13 @@ Check `HTML` element visibility.
 
 * `#is_visible!` - ensure the `HTML` element is visible.
 * `#is_not_visible!` - ensure the `HTML` element is not visible.
+
+Interact with checkbox field.
+
+* `#is_checked!` - ensure checkbox is checked.
+* `#is_not_checked!` - ensure checkbox is not checked.
+* `#check` - check the checkbox. Leaves the checkbox in a checked state. If the checkbox is already checked, this method does nothing.
+* `#uncheck` - uncheck the checkbox. Leaves the checkbox in an unchecked state. If the checkbox is already unchecked, this method does nothing.
 
 ## Development
 
