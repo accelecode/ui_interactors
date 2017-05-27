@@ -48,26 +48,41 @@ end
 page.view('dashboard').is_visible!
 ```
 
-*Please see the example section below for more details concerning working with interactors.*
+*More example code is available in the example sections below.*
 
-Element selection is based on using a series of conventions for HTML attribute name/value pairs. The attribute name is used to identify the type of element being interacted with (view, form field, etc). The attribute value is used to identify the specific element.
+The `ui_interactors` gem generalizes `HTML` elements into these types:
 
-For example, views which contain other elements are identified by the `HTML` attribute `data-view`. The associated attribute value is the name of the view. In `<div data-view='dashboard'></div>`, the div is identified as a view with the name *dashboard*.
+* View - container for other elements.
+* Element - read-only text.
+* Action - clickable/tappable element.
+* List - container for rows.
+* Row - child of a list and also a container for other elements (a special type of view element).
+* Text Field - text input field.
+* Dropdown - select field.
+* Checkbox - checkbox field.
 
-The attribute-based approach used to select, interact with and test visibility of elements is resistant to `HTML` structure and style changes.
+Element selection is based on using a series of conventions for `HTML` attribute name/value pairs. The attribute *name* is used to identify the type of element being interacted with (view, form field, etc). The attribute *value* is used to identify the specific element.
+
+In `HTML`, we identify the type of element using the conventions required by the `ui_interactors` gem. In our code, we use what are called *interactors* to find, test visibility of and otherwise interact with these elements.
+
+For example, views which contain other elements are identified by the `HTML` attribute `data-view`. The associated attribute value is the name of the view. In `<div data-view='dashboard'></div>`, the `div` is identified as a view with the name *dashboard*.
+
+Views and rows can contain other nested elements. Either of the associated interactors (`ViewInteractor` and `RowInteractor`) can be used to limit our search for elements to just their children. Consider the example `page.view('sign-in').text_field('email').is_visible!`. This line tests the visibility of the `email` text field, but will only look for that field as a child of the `sign-in` view.
+
+This fluent-style API makes it quick and easy to select and interact with exactly the elements you need to. At the same time, the attribute-based approach used to identify `HTML` elements is resistant to `HTML` structure and style changes. The end result of using this approach is a nice combination of easy to write functional tests which are resistant to layout and style changes.
 
 #### Interactors
 
-The term *interactor* is used to refer to a special selenium-based interface provided by this gem for interacting with elements on a page. This gem provides several interactors:
+The term *interactor* is used to refer to a special selenium-based Ruby class provided by this gem for interacting with an `HTML` element. This gem provides several interactors - one for each of the related elements:
 
-* View
-* Element
-* Action
-* List
-* Row
-* Text Field
-* Drop Down
-* Check Box
+* `ViewInteractor`
+* `ElementInteractor`
+* `ActionInteractor`
+* `ListInteractor`
+* `RowInteractor`
+* `TextFieldInteractor`
+* `DropdownFieldInteractor`
+* `CheckboxFieldInteractor`
 
 **ViewInteractor** represents a container `HTML` for other elements. These elements are designated by the `HTML` attribute `data-view='name'` which makes them selectable as a `ViewInteractor`. A `ViewInteractor` represents a context within a page.
 
@@ -75,9 +90,21 @@ Other interactors can be selected as children of a `ViewInteractor`. Our example
 
 If we had a more complex page, with many nested views, these could be used to select other unique elements. For example: `page.view('dashboard').view('stats').view('users').element('user-count')`.
 
-**ElementInteractor** represents an `HTML` element which contains only text. For example, the name of a person. These elements are designated by the `HTML` attribute `data-element='name'` which makes them selectable as an `ElementInteractor`. For example: `<span data-element='name'>John Doe</span>`.
+**ElementInteractor** represents an `HTML` element which contains only text. For example, the name of a person. These elements are designated by the `HTML` attribute `data-element='name'` which makes them selectable as an `ElementInteractor` using the `name`. For example: `<span data-element='name'>John Doe</span>`.
 
-### Example: Sign In Form
+**ActionInteractor** represents an `HTML` element which can be clicked on (desktop) or tapped on (mobile). These elements are designated by the `HTML` attribute `data-action='name'` which makes them selectable as an `ActionInteractor` using the `name`. For example, `<a data-action='navigate-home'>Home</a>`. An action is not limited to `<a>` elements. It is any element with the `data-action` attribute.
+
+**ListInteractor** represents an `HTML` element which contains "rows". These elements are designated by the `HTML` attribute `data-view='name'`, like a `ViewInteractor` is.
+
+**RowInteractor** represents an `HTML` element that contains other elements, and as such, acts like a `ViewInteractor`. A `RowInteractor` is always a child of a `ListInteractor` and is selectable based on (1) having the attribute `data-view='row'` and having one or more `ElementInteractors` (`data-element` elements). Please refer to the section below, titled *Example #2: Working With Lists & Rows* for a concrete example.
+
+**TextFieldInteractor**
+
+**DropdownFieldInteractor**
+
+**CheckboxFieldInteractor**
+
+### Example #1: Sign In Form
 
 Consider a simple example: automating the sign in process for a typical web application.
 
@@ -188,6 +215,74 @@ For example, the same test would pass for this sign in form with (1) more elemen
 The example above uses `minitest`. However, `minitest` is not required. You can use any test framework you want, or no test framework at all. However, there is a special level of support provided by the gem for `minitest`.
 
 The test base class defines a root view (an unnamed view which represents the page itself). Inside the test, references to interactors are forwarded to the root view (`view`, `action`, `element`, `list`, `text_field`, `dropdown_field`, `checkbox_field`). As such, we can use code like this directly in the test `view('dashboard').is_not_visible!`. Here, `view` is being forwarded to the root view, which is acting as a default scope.
+
+### Example #2: Working With Lists & Rows
+
+Working with lists can be a key automation problem. Consider another example: clicking an action that is inside a row.
+
+Given this `HTML`:
+
+```html
+<div data-view="people">
+  <div data-view="row">
+    <span data-element="firstName">John</span>
+    <span data-element="lastName">Smith</span>
+    <span data-view="friends"><span data-element="first">Gloria</span>, <span data-element="second">Richard</span></span>
+    <a data-action="view-record" href="john-smith.html">view</a>
+  </div>
+  <div data-view="row">
+    <span data-element="firstName">John</span>
+    <span data-element="lastName">Miller</span>
+    <span data-view="friends"><span data-element="first">James</span>, <span data-element="second">Amy</span></span>
+    <a data-action="view-record" href="john-miller.html">view</a>
+  </div>
+</div>
+```
+
+How can we click on the `view-record` action for the person named John Miller? We need to first identify the row for John Miller, find the related action and then click on it.
+
+This could be a challenging situation to automate. Depending on the circumstance of the test, we cannot assume that John Miller is the second row. Additionally, the first name and last name are broken up into two different `HTML` elements, which could make it harder for us to find the correct row.
+
+This is what the `ui_interactors`-based code would look like to activate the `view-record` action for John Miller:
+
+```ruby
+# Setup our page/root view interactor
+require 'selenium-webdriver'
+require 'ui_interactors'
+
+options = {}
+driver = Selenium::WebDriver.for(:chrome, options)
+url = 'http://localhost:3000/'
+driver.navigate.to(url)
+
+page = UiInteractors::Interactors::ViewInteractor.new(driver)
+
+# Activate the action
+page.list('people').row(elements: {firstName: 'John', lastName: 'Miller'}).action('view-record').activate
+```
+
+In one line, using a fluent API, we have (1) identified the action for the correct row and (2) activated that action.
+
+Further, consider how this approach is resistant to `HTML` changes. The same line of Ruby would activate the correct action for this `HTML`, which is quite different from the previous `HTML`:
+
+```html
+<div data-view="people">
+  <div data-view="row">
+    <a data-action="view-record" href="john-smith.html">
+      <span data-element="firstName">John</span>
+      <span data-element="lastName">Smith</span>
+    </a>
+  </div>
+  <div data-view="row">
+    <a data-action="view-record" href="john-miller.html">
+      <span data-element="firstName">John</span>
+      <span data-element="lastName">Miller</span>
+    </a>
+  </div>
+</div>
+```
+
+By following some basic guidelines, like keeping the same elements in the row (`data-element='firstName'`, `data-element='lastName'`, and `data-action='view-record'`), automated tests would continue to pass even after making drastic changes to the `HTML`. This is a great benefit of using `ui_interactors` for test automation.
 
 ## Interactor Reference
 
