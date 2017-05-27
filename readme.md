@@ -61,11 +61,13 @@ The `ui_interactors` gem generalizes `HTML` elements into these types:
 * Dropdown - select field.
 * Checkbox - checkbox field.
 
-Element selection is based on using a series of conventions for `HTML` attribute name/value pairs. The attribute *name* is used to identify the type of element being interacted with (view, form field, etc). The attribute *value* is used to identify the specific element.
-
-In `HTML`, we identify the type of element using the conventions required by the `ui_interactors` gem. In our code, we use what are called *interactors* to find, test visibility of and otherwise interact with these elements.
+This gem requires that you follow conventions in `HTML` to identify elements. The type of element is identified using a special `HTML` attribute name. The attribute *value* is used to identify the specific element.
 
 For example, views which contain other elements are identified by the `HTML` attribute `data-view`. The associated attribute value is the name of the view. In `<div data-view='dashboard'></div>`, the `div` is identified as a view with the name *dashboard*.
+
+By not classifying an element based on it's tag name (`<a>`, `<button>`, etc) or based on a `CSS` class name, we prevent our test code from being tightly coupled to design-related code. This can prevent many test failures related to design & layout changes. These design & layout changes do not change the functionality we are testing, but they could cause failures by changing the `HTML` tags or `CSS` classes our test code is expecting.
+
+Identifying elements in `HTML` is one side of the equation, interacting with those elements in our tests is the other side. In our Ruby code, we use what are called *interactors* to find, test the visibility of and otherwise interact with these elements identified using the required `HTML` attributes.
 
 Views and rows can contain other nested elements. Either of the associated interactors (`ViewInteractor` and `RowInteractor`) can be used to limit our search for elements to just their children. Consider the example `page.view('sign-in').text_field('email').is_visible!`. This line tests the visibility of the `email` text field, but will only look for that field as a child of the `sign-in` view.
 
