@@ -56,6 +56,27 @@ For example, views which contain other elements are identified by the `HTML` att
 
 The attribute-based approach used to select, interact with and test visibility of elements is resistant to `HTML` structure and style changes.
 
+#### Interactors
+
+The term *interactor* is used to refer to a special selenium-based interface provided by this gem for interacting with elements on a page. This gem provides several interactors:
+
+* View
+* Element
+* Action
+* List
+* Row
+* Text Field
+* Drop Down
+* Check Box
+
+**ViewInteractor** represents a container `HTML` for other elements. These elements are designated by the `HTML` attribute `data-view='name'` which makes them selectable as a `ViewInteractor`. A `ViewInteractor` represents a context within a page.
+
+Other interactors can be selected as children of a `ViewInteractor`. Our example above uses the page view as context to select the `sign-in` view: `page.view('sign-in')`.
+
+If we had a more complex page, with many nested views, these could be used to select other unique elements. For example: `page.view('dashboard').view('stats').view('users').element('user-count')`.
+
+**ElementInteractor** represents an `HTML` element which contains only text. For example, the name of a person. These elements are designated by the `HTML` attribute `data-element='name'` which makes them selectable as an `ElementInteractor`. For example: `<span data-element='name'>John Doe</span>`.
+
 ### Example: Sign In Form
 
 Consider a simple example: automating the sign in process for a typical web application.
