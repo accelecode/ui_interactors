@@ -22,12 +22,22 @@ Or install it yourself as:
 
 ### Overview
 
-Use **interactors** to select, interact and test visibility of elements. The goal of the `ui_interactors` gem is to allow you to write simple `Ruby` code like this to automate functional tests for web applications - tests that are resilient to `HTML` layout changes and `CSS` style changes:
+Use **interactors** to select, interact with and test the visibility of elements. The goal of the `ui_interactors` gem is to allow you to write simple `Ruby` code like this to automate functional tests for web applications - tests that are resilient to `HTML` layout changes and `CSS` style changes:
 
 ```ruby
-view('dashboard').is_not_visible!
+require 'selenium-webdriver'
+require 'ui_interactors'
 
-view('sign-in').tap do |v|
+options = {}
+driver = Selenium::WebDriver.for(:chrome, options)
+url = 'http://localhost:3000/'
+driver.navigate.to(url)
+
+page = UiInteractors::Interactors::ViewInteractor.new(driver)
+
+page.view('dashboard').is_not_visible!
+
+page.view('sign-in').tap do |v|
   v.is_visible!
   v.text_field('email').enter_text('a7a80644@d9c4d54f.5a0')
   v.text_field('password').enter_text('57bc8f19c898')
@@ -35,10 +45,10 @@ view('sign-in').tap do |v|
   v.is_not_visible!
 end
 
-view('dashboard').is_visible!
+page.view('dashboard').is_visible!
 ```
 
-*For further discussion of this code, please see the example section below.*
+*Please see the example section below for more details concerning working with interactors.*
 
 Element selection is based on using a series of conventions for HTML attribute name/value pairs. The attribute name is used to identify the type of element being interacted with (view, form field, etc). The attribute value is used to identify the specific element.
 
@@ -73,16 +83,13 @@ Here is the important part of the `HTML` we expect to see on the authenticated h
 </div>
 ```
 
-And finally, this is the `Ruby` we expect to write to automate the sign in process:
+And finally, this is the `Ruby` we expect to write to automate the sign in process (using the built-in `minitest` support):
 
 ```ruby
+require 'selenium-webdriver'
 require 'ui_interactors/minitest/interactor_test'
 
 class TestSignInSuccess < UiInteractors::InteractorTest
-
-  def provide_driver
-    DriverProvider.instance.driver
-  end
 
   def test_successful_sign_in
     view('dashboard').is_not_visible!
@@ -96,6 +103,22 @@ class TestSignInSuccess < UiInteractors::InteractorTest
     end
 
     view('dashboard').is_visible!
+  end
+
+  # This method is used to provide the driver to the base class in order for it to wire up ui_interactors support.
+  # Note too that you can use this approach along with your own test base class to create a singleton instance of the
+  # driver for reuse. Please see this gem's test suite for an example.
+  def provide_driver
+    # avoid the "save password?" Chrome dialog
+    options = {
+      'prefs': {
+        'credentials_enable_service': false,
+        'profile': {
+          'password_manager_enabled': false
+        }
+      }
+    }
+    Selenium::WebDriver.for(:chrome, options)
   end
 
 end
@@ -141,9 +164,13 @@ For example, the same test would pass for this sign in form with (1) more elemen
 
 #### minitest
 
-The example above uses `minitest`. However, `minitest` is not required. You can use any test framework you want, or no test framework at all. However, there is a special level of support provided by the gem for `minitest`. The test base class defines a root view (an unnamed view). Inside the test, references to interactors are forwarded to the root view (`view`, `action`, `element`, `list`, `text_field`, `dropdown_field`, `checkbox_field`). As such, we can use code like this directly in the test `view('dashboard').is_not_visible!`. `view` is being forwarded to the root view, which is acting as a default scope.
+The example above uses `minitest`. However, `minitest` is not required. You can use any test framework you want, or no test framework at all. However, there is a special level of support provided by the gem for `minitest`.
+
+The test base class defines a root view (an unnamed view which represents the page itself). Inside the test, references to interactors are forwarded to the root view (`view`, `action`, `element`, `list`, `text_field`, `dropdown_field`, `checkbox_field`). As such, we can use code like this directly in the test `view('dashboard').is_not_visible!`. Here, `view` is being forwarded to the root view, which is acting as a default scope.
 
 ## Interactor Reference
+
+Following is a reference of all public methods available for each interactor.
 
 ### `ViewInteractor`
 
