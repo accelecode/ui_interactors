@@ -77,14 +77,14 @@ This fluent-style API makes it quick and easy to select and interact with exactl
 
 The term *interactor* is used to refer to a special selenium-based Ruby class provided by this gem for interacting with an `HTML` element. This gem provides several interactors - one for each of the related elements:
 
-* `ViewInteractor`
-* `ElementInteractor`
-* `ActionInteractor`
-* `ListInteractor`
-* `RowInteractor`
-* `TextFieldInteractor`
-* `DropdownFieldInteractor`
-* `CheckboxFieldInteractor`
+* **ViewInteractor**
+* **ElementInteractor**
+* **ActionInteractor**
+* **ListInteractor**
+* **RowInteractor**
+* **TextFieldInteractor**
+* **DropdownFieldInteractor**
+* **CheckboxFieldInteractor**
 
 **ViewInteractor** represents a container `HTML` for other elements. These elements are designated by the `HTML` attribute `data-view='name'` which makes them selectable as a `ViewInteractor`. A `ViewInteractor` represents a context within a page.
 
