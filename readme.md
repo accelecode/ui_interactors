@@ -100,11 +100,11 @@ If we had a more complex page, with many nested views, these could be used to se
 
 **RowInteractor** represents an `HTML` element that contains other elements, and as such, acts like a `ViewInteractor`. A `RowInteractor` is always a child of a `ListInteractor` and is selectable based on (1) having the attribute `data-view='row'` and having one or more `ElementInteractors` (`data-element` elements). Please refer to the section below, titled *Example #2: Working With Lists & Rows* for a concrete example.
 
-**TextFieldInteractor**
+**TextFieldInteractor** represents an `HTML` text field element. These elements are designated by the standard `HTML` attribute `name='name'` which makes them selectable as a `TextFieldInteractor` using the value for `name`. For example, `<input type='text' name='firstName' />`. Elements which can be used with this interactor are: `<input type='text'>`, `<input type='password'>` and `<textarea>`.
 
-**DropdownFieldInteractor**
+**DropdownFieldInteractor** represents an `HTML` `<select>` element with `<option>` child elements. A dropdown field element is designated by the standard `HTML` attribute `name='name'` which makes them selectable as a `DropdownFieldInteractor` using the value for `name`. For example, `<select name='userType'><option>Standard</option><option>Admin</option></select>`.
 
-**CheckboxFieldInteractor**
+**CheckboxFieldInteractor** represents an `HTML` checkbox input field element. These elements are designated by the standard `HTML` attribute `name='name'` which makes them selectable as a `CheckboxFieldInteractor` using the value for `name`. For example, `<input type='checkbox' name='isAdmin' />`.
 
 ### Example #1: Sign In Form
 
