@@ -12,8 +12,8 @@ module UiInteractors module Interactors class ViewInteractor < BaseInteractor
     ActionInteractor.new(@driver, name, current_xpath)
   end
 
-  def element(name)
-    ElementInteractor.new(@driver, name, current_xpath)
+  def text(name)
+    TextInteractor.new(@driver, name, current_xpath)
   end
 
   def list(name)

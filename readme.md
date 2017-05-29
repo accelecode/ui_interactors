@@ -78,7 +78,7 @@ This fluent-style API makes it quick and easy to select and interact with exactl
 The term *interactor* is used to refer to a special selenium-based Ruby class provided by this gem for interacting with an `HTML` element. This gem provides several interactors - one for each of the related elements:
 
 * **ViewInteractor**
-* **ElementInteractor**
+* **TextInteractor**
 * **ActionInteractor**
 * **ListInteractor**
 * **RowInteractor**
@@ -90,15 +90,15 @@ The term *interactor* is used to refer to a special selenium-based Ruby class pr
 
 Other interactors can be selected as children of a `ViewInteractor`. Our example above uses the page view as context to select the `sign-in` view: `page.view('sign-in')`.
 
-If we had a more complex page, with many nested views, these could be used to select other unique elements. For example: `page.view('dashboard').view('stats').view('users').element('user-count')`.
+If we had a more complex page, with many nested views, these could be used to select other unique elements. For example: `page.view('dashboard').view('stats').view('users').text('user-count')`.
 
-**ElementInteractor** represents an `HTML` element which contains only text. For example, the name of a person. These elements are designated by the `HTML` attribute `data-element='name'` which makes them selectable as an `ElementInteractor` using the `name`. For example: `<span data-element='name'>John Doe</span>`.
+**TextInteractor** represents an `HTML` element which contains only text. For example, the name of a person. These elements are designated by the `HTML` attribute `data-text='name'` which makes them selectable as an `TextInteractor` using the `name`. For example: `<span data-text='name'>John Doe</span>`.
 
 **ActionInteractor** represents an `HTML` element which can be clicked on (desktop) or tapped on (mobile). These elements are designated by the `HTML` attribute `data-action='name'` which makes them selectable as an `ActionInteractor` using the `name`. For example, `<a data-action='navigate-home'>Home</a>`. An action is not limited to `<a>` elements. It is any element with the `data-action` attribute.
 
 **ListInteractor** represents an `HTML` element which contains "rows". These elements are designated by the `HTML` attribute `data-view='name'`, like a `ViewInteractor` is.
 
-**RowInteractor** represents an `HTML` element that contains other elements, and as such, acts like a `ViewInteractor`. A `RowInteractor` is always a child of a `ListInteractor` and is selectable based on (1) having the attribute `data-view='row'` and having one or more `ElementInteractors` (`data-element` elements). Please refer to the section below, titled *Example #2: Working With Lists & Rows* for a concrete example.
+**RowInteractor** represents an `HTML` element that contains other elements, and as such, acts like a `ViewInteractor`. A `RowInteractor` is always a child of a `ListInteractor` and is selectable based on (1) having the attribute `data-view='row'` and having one or more `TextInteractor`'s (`data-text` elements). Please refer to the section below, titled *Example #2: Working With Lists & Rows* for a concrete example.
 
 **TextFieldInteractor** represents an `HTML` text field element. These elements are designated by the standard `HTML` attribute `name='name'` which makes them selectable as a `TextFieldInteractor` using the value for `name`. For example, `<input type='text' name='firstName' />`. Elements which can be used with this interactor are: `<input type='text'>`, `<input type='password'>` and `<textarea>`.
 
@@ -227,15 +227,15 @@ Given this `HTML`:
 ```html
 <div data-view="people">
   <div data-view="row">
-    <span data-element="firstName">John</span>
-    <span data-element="lastName">Smith</span>
-    <span data-view="friends"><span data-element="first">Gloria</span>, <span data-element="second">Richard</span></span>
+    <span data-text="firstName">John</span>
+    <span data-text="lastName">Smith</span>
+    <span data-view="friends"><span data-text="first">Gloria</span>, <span data-text="second">Richard</span></span>
     <a data-action="view-record" href="john-smith.html">view</a>
   </div>
   <div data-view="row">
-    <span data-element="firstName">John</span>
-    <span data-element="lastName">Miller</span>
-    <span data-view="friends"><span data-element="first">James</span>, <span data-element="second">Amy</span></span>
+    <span data-text="firstName">John</span>
+    <span data-text="lastName">Miller</span>
+    <span data-view="friends"><span data-text="first">James</span>, <span data-text="second">Amy</span></span>
     <a data-action="view-record" href="john-miller.html">view</a>
   </div>
 </div>
@@ -271,20 +271,20 @@ Further, consider how this approach is resistant to `HTML` changes. The same lin
 <div data-view="people">
   <div data-view="row">
     <a data-action="view-record" href="john-smith.html">
-      <span data-element="firstName">John</span>
-      <span data-element="lastName">Smith</span>
+      <span data-text="firstName">John</span>
+      <span data-text="lastName">Smith</span>
     </a>
   </div>
   <div data-view="row">
     <a data-action="view-record" href="john-miller.html">
-      <span data-element="firstName">John</span>
-      <span data-element="lastName">Miller</span>
+      <span data-text="firstName">John</span>
+      <span data-text="lastName">Miller</span>
     </a>
   </div>
 </div>
 ```
 
-By following some basic guidelines, like keeping the same elements in the row (`data-element='firstName'`, `data-element='lastName'`, and `data-action='view-record'`), automated tests would continue to pass even after making drastic changes to the `HTML`. This is a great benefit of using `ui_interactors` for test automation.
+By following some basic guidelines, like keeping the same elements in the row (`data-text='firstName'`, `data-text='lastName'`, and `data-action='view-record'`), automated tests would continue to pass even after making drastic changes to the `HTML`. This is a great benefit of using `ui_interactors` for test automation.
 
 ## Interactor Reference
 
@@ -307,13 +307,13 @@ Select child elements via interactors scoped to the current `view`.
 
 * `#view(name)` - returns a `ViewInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
 * `#action(name)` - returns an `ActionInteractor` representing a child element with the `data-action` attribute value corresponding to `name` (`<element data-action='name' />`).
-* `#element(name)` - returns an `ElementInteractor` representing a child element with the `data-element` attribute value corresponding to `name` (`<element data-element='name' />`).
+* `#text(name)` - returns an `TextInteractor` representing a child element with the `data-text` attribute value corresponding to `name` (`<element data-text='name' />`).
 * `#list(name)` - returns a `ListInteractor` representing a child element with the `data-view` attribute value corresponding to `name` (`<element data-view='name' />`).
 * `#text_field(name)` - returns a `TextFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
 * `#dropdown_field(name)` - returns a `DropdownFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
 * `#checkbox_field(name)` - returns a `CheckboxFieldInteractor` representing a child element with the given `name` attribute (`<element name='name' />`).
 
-### `ElementInteractor`
+### `TextInteractor`
 
 *Methods*
 
@@ -351,7 +351,7 @@ Check `HTML` element visibility.
 
 Select a row.
 
-* `#row(selector_options)` - uses the given `selector_options` to select a row (return a `RowInteractor`). `selector_options` is a `Hash` which expects a single key/value pair with the key `:elements`. The value for `:elements` is a `Hash` that describes the element names and values which identify a row. Row `HTML` elements are children of the list `HTML` element. Row `HTML` elements follow the special attribute naming convention `data-view='row'`. These row `HTML` elements are then matched using the given `:elements` `Hash`. For example this `selector_options` value, `{elements: {firstName: 'John', lastName: 'Doe'}}`, would match a row with the two `data-element` elements described (`<div data-view='row'><span data-element='firstName'>John</span><span data-element='lastName'>Doe</span></div>`). Note that the row would then be treated as a `ViewInteractor` allowing you to find and interact with other views, elements, fields, actions, etc.
+* `#row(selector_options)` - uses the given `selector_options` to select a row (return a `RowInteractor`). `selector_options` is a `Hash` which expects a single key/value pair with the key `:texts`. The value for `:texts` is a `Hash` that describes the text names and values which identify a row. Row `HTML` elements are children of the list `HTML` element. Row `HTML` elements follow the special attribute naming convention `data-view='row'`. These row `HTML` elements are then matched using the given `:texts` `Hash`. For example this `selector_options` value, `{texts: {firstName: 'John', lastName: 'Doe'}}`, would match a row with the two `data-text` elements described (`<div data-view='row'><span data-text='firstName'>John</span><span data-text='lastName'>Doe</span></div>`). Note that the row would then be treated as a `ViewInteractor` allowing you to find and interact with other views, elements, fields, actions, etc.
 
 ### `RowInteractor`
 

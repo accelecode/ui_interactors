@@ -1,4 +1,4 @@
-module UiInteractors module Interactors class ElementInteractor < BaseInteractor
+module UiInteractors module Interactors class TextInteractor < BaseInteractor
 
   def initialize(driver, name, xpath_root='//*')
     super
@@ -15,7 +15,7 @@ module UiInteractors module Interactors class ElementInteractor < BaseInteractor
   private
 
   def current_xpath
-    "#{@xpath_root}//*[@data-element='#{@name}']"
+    "#{@xpath_root}//*[@data-text='#{@name}']"
   end
 
 end end end

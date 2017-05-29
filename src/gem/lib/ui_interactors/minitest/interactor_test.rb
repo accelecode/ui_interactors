@@ -14,7 +14,7 @@ module UiInteractors class InteractorTest < Minitest::Test
     @root_view = UiInteractors::Interactors::ViewInteractor.new(@driver)
   end
 
-  def_delegators :root_view, :view, :action, :element, :list, :text_field, :dropdown_field, :checkbox_field
+  def_delegators :root_view, :view, :action, :text, :list, :text_field, :dropdown_field, :checkbox_field
 
   def provide_driver
     raise('Subclass must define `#provide_driver()`')
