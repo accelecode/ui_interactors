@@ -52,14 +52,14 @@ page.view('dashboard').is_visible!
 
 The `ui_interactors` gem generalizes `HTML` elements into these types:
 
-* View - container for other elements.
-* Element - read-only text.
-* Action - clickable/tappable element.
-* List - container for rows.
-* Row - child of a list and also a container for other elements (a special type of view element).
-* Text Field - text input field.
-* Dropdown - select field.
-* Checkbox - checkbox field.
+* **View** - container for other elements (`<div>`, `<span>`, etc).
+* **Element** - any element containing only text (`<div>`, `<span>`, etc).
+* **Action** - an element which could be clicked or tapped (`<a>`, `<button>`, `<div>`, `<span>`, etc).
+* **List** - container for rows (typically a `<div>`, but could also be a `<table>`, or any other element containing other elements).
+* **Row** - child of a list and also a container for other elements (a special type of **view**).
+* **Text Field** - text input field (`<input type='text'>`, `<input type='password'>`, `<textarea>`).
+* **Dropdown** - dropdown list field with options (`<select>`).
+* **Checkbox** - checkbox field (`<input type='checkbox'>`).
 
 This gem requires that you follow conventions in `HTML` to identify elements. The type of element is identified using a special `HTML` attribute name. The attribute *value* is used to identify the specific element.
 
