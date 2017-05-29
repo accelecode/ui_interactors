@@ -53,7 +53,7 @@ page.view('dashboard').is_visible!
 The `ui_interactors` gem generalizes `HTML` elements into these types:
 
 * **View** - container for other elements (`<div>`, `<span>`, etc).
-* **Element** - any element containing only text (`<div>`, `<span>`, etc).
+* **Text** - any element containing only text (`<div>`, `<span>`, etc).
 * **Action** - an element which could be clicked or tapped (`<a>`, `<button>`, `<div>`, `<span>`, etc).
 * **List** - container for rows (typically a `<div>`, but could also be a `<table>`, or any other element containing other elements).
 * **Row** - child of a list and also a container for other elements (a special type of **view**).
