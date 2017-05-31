@@ -260,7 +260,7 @@ driver.navigate.to(url)
 page = UiInteractors::Interactors::ViewInteractor.new(driver)
 
 # Activate the action
-page.list('people').row(elements: {firstName: 'John', lastName: 'Miller'}).action('view-record').activate
+page.list('people').row(texts: {firstName: 'John', lastName: 'Miller'}).action('view-record').activate
 ```
 
 In one line, using a fluent API, we have (1) identified the action for the correct row and (2) activated that action.
