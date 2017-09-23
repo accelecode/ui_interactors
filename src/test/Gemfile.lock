@@ -1,7 +1,7 @@
 PATH
   remote: ../gem
   specs:
-    ui_interactors (0.3.0)
+    ui_interactors (0.4.0)
       selenium-webdriver (~> 3.5.2)
 
 GEM
