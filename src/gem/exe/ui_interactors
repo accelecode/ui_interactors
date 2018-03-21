@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require 'thor'
+
+module UiInteractors
+  class CLI < Thor
+
+    desc 'gen [PATH]', 'Generate a new test suite'
+    long_desc <<~DESC
+      Generate a new test suite
+
+      [PATH] is the relative or absolute path where the test suite should be generated.
+    DESC
+    def gen(path)
+      full_path = File.expand_path(path)
+      puts "Generating at: #{full_path}"
+    end
+
+  end
+end
+
+UiInteractors::CLI.start(ARGV)
