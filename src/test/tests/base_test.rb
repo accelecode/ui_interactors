@@ -8,6 +8,7 @@ class BaseTest < UiInteractors::InteractorTest
   def setup
     super
     @ui_steps ||= UiSteps.new(driver, root_view)
+    @ui_steps.navigate_to_reset
   end
 
   def provide_driver

@@ -12,6 +12,11 @@ class UiSteps
     @root_view = root_view
   end
 
+  def navigate_to_reset
+    driver.navigate.to('http://localhost:8000/reset.html')
+    view('reset').is_visible!
+  end
+
   def navigate_to_home
     driver.navigate.to('http://localhost:8000/')
     view('home').is_visible!
