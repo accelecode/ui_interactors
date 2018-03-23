@@ -2,6 +2,7 @@
 require 'erb'
 require 'fileutils'
 require 'thor'
+require_relative File.join('..', 'lib', 'ui_interactors')
 
 module UiInteractors
   class CLI < Thor
@@ -49,7 +50,7 @@ module UiInteractors
 
     def generate_project_root_files(new_project_path)
       generate_template(new_project_path, '.ruby-version.erb', '.ruby-version')
-      generate_template(new_project_path, 'Gemfile.rb.erb', 'Gemfile')
+      generate_template(new_project_path, 'Gemfile.rb.erb', 'Gemfile', version: UiInteractors::VERSION)
       generate_template(new_project_path, 'Rakefile.rb.erb', 'Rakefile')
     end
 
