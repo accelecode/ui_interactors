@@ -60,17 +60,24 @@ module UiInteractors
     end
 
     def generate_base_test_files(new_project_path)
-      create_output_path(new_project_path, 'tests')
-      generate_template(new_project_path, File.join('tests', 'base_test.rb.erb'), File.join('tests', 'base_test.rb'), app_url: app_url_option)
-      generate_template(new_project_path, File.join('tests', 'driver_provider.rb.erb'), File.join('tests', 'driver_provider.rb'))
-      generate_template(new_project_path, File.join('tests', 'ui_steps.rb.erb'), File.join('tests', 'ui_steps.rb'))
-      create_output_path(new_project_path, File.join('tests', 'example'))
-      generate_template(new_project_path, File.join('tests', 'example', 'test_example.rb.erb'), File.join('tests', 'example', 'test_example.rb.erb'))
+
+      'tests'.tap do |relative_path|
+        create_output_path(new_project_path, relative_path)
+        generate_template(new_project_path, File.join(relative_path, 'base_test.rb.erb'), File.join(relative_path, 'base_test.rb'), app_url: app_url_option)
+        generate_template(new_project_path, File.join(relative_path, 'driver_provider.rb.erb'), File.join(relative_path, 'driver_provider.rb'))
+        generate_template(new_project_path, File.join(relative_path, 'ui_steps.rb.erb'), File.join(relative_path, 'ui_steps.rb'))
+      end
+
+      File.join('tests', 'example').tap do |relative_path|
+        create_output_path(new_project_path, relative_path)
+        generate_template(new_project_path, File.join(relative_path, 'test_example.rb.erb'), File.join(relative_path, 'test_example.rb.erb'))
+      end
+
     end
 
-    def generate_template(new_project_path, template_file_relative_path, output_file_relative_path, locals={})
+    def generate_template(new_project_path, template_file_relative_path, output_file_relative_path, template_locals={})
       template = File.read(File.join(templates_path, template_file_relative_path))
-      output_contents = ERB.new(template).result_with_hash(locals)
+      output_contents = ERB.new(template).result_with_hash(template_locals)
       output_path = File.join(new_project_path, output_file_relative_path)
       File.write(output_path, output_contents)
       puts "Generated file: #{output_file_relative_path}"
