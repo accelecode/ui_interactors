@@ -64,6 +64,8 @@ module UiInteractors
       generate_template(new_project_path, File.join('tests', 'base_test.rb.erb'), File.join('tests', 'base_test.rb'), app_url: app_url_option)
       generate_template(new_project_path, File.join('tests', 'driver_provider.rb.erb'), File.join('tests', 'driver_provider.rb'))
       generate_template(new_project_path, File.join('tests', 'ui_steps.rb.erb'), File.join('tests', 'ui_steps.rb'))
+      create_output_path(new_project_path, File.join('tests', 'example'))
+      generate_template(new_project_path, File.join('tests', 'example', 'test_example.rb.erb'), File.join('tests', 'example', 'test_example.rb.erb'))
     end
 
     def generate_template(new_project_path, template_file_relative_path, output_file_relative_path, locals={})

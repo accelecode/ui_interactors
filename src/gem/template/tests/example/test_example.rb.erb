@@ -1,0 +1,27 @@
+require_relative '../base_test'
+
+# TODO: remove this file and code. It exists solely as a reference to create your first test
+# The test class below includes a single test which illustrates how you might automate the sign in process for a typical
+# web application. Note that #setup is navigating to the home url. This should generally redirect a user to the sign in
+# page. We confirm this is the case in the test by ensuring the `sign-in` view is visible.
+
+class TestExample < BaseTest
+
+  def setup
+    super
+    ui_steps.navigate_to_home
+  end
+
+  def test_sign_in
+    view('sign-in').tap do |v|
+      v.is_visible!
+      v.text_field('email').enter_text('email@example.org')
+      v.text_field('password').enter_text('password123')
+      v.action('submit').activate
+      v.is_not_visible!
+    end
+
+    view('dashboard').is_visible!
+  end
+
+end
