@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+require 'erb'
+require 'fileutils'
 require 'thor'
 
 module UiInteractors
@@ -11,10 +13,61 @@ module UiInteractors
       [PATH] is the relative or absolute path where the test suite should be generated.
     DESC
     def gen(path)
-      full_path = File.expand_path(path)
-      puts "Generating at: #{full_path}"
+      new_project_path = File.expand_path(path)
+      puts "Using path: #{new_project_path}"
+
+      if File.exists?(new_project_path)
+        puts 'Path already exists, no action taken'
+        return
+      else
+        FileUtils.mkdir_p(new_project_path)
+        puts "Created path: #{new_project_path}"
+      end
+
+      generate_files(new_project_path)
     end
 
+    private
+
+    def current_path
+      File.expand_path(File.dirname(__FILE__))
+    end
+
+    def templates_path
+      File.expand_path(File.join(current_path, '..', 'template'))
+    end
+
+    def generate_files(new_project_path)
+      generate_project_root_files(new_project_path)
+      generate_base_test_files(new_project_path)
+    end
+
+    def generate_project_root_files(new_project_path)
+      generate_template(new_project_path, '.ruby-version.erb', '.ruby-version')
+      generate_template(new_project_path, 'Gemfile.rb.erb', 'Gemfile')
+      generate_template(new_project_path, 'Rakefile.rb.erb', 'Rakefile')
+    end
+
+    def generate_base_test_files(new_project_path)
+      create_output_path(new_project_path, 'tests')
+      generate_template(new_project_path, File.join('tests', 'base_test.rb.erb'), File.join('tests', 'base_test.rb'))
+      generate_template(new_project_path, File.join('tests', 'driver_provider.rb.erb'), File.join('tests', 'driver_provider.rb'))
+      generate_template(new_project_path, File.join('tests', 'ui_steps.rb.erb'), File.join('tests', 'ui_steps.rb'))
+    end
+
+    def generate_template(new_project_path, template_file_relative_path, output_file_relative_path, locals={})
+      template = File.read(File.join(templates_path, template_file_relative_path))
+      output_contents = ERB.new(template).result_with_hash(locals)
+      output_path = File.join(new_project_path, output_file_relative_path)
+      File.write(output_path, output_contents)
+      puts "Generated file: #{output_file_relative_path}"
+    end
+
+    def create_output_path(base_path, new_relative_path)
+      new_dir_path = File.join(base_path, new_relative_path)
+      FileUtils.mkdir_p(new_dir_path)
+      puts "Created path: #{new_relative_path}"
+    end
   end
 end
 
