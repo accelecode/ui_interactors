@@ -21,7 +21,6 @@ class UiSteps
 
   def navigate_to_home
     driver.navigate.to(home_url)
-    view('home').is_visible!
   end
 
 end
