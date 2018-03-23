@@ -12,16 +12,38 @@ class TestExample < BaseTest
     ui_steps.navigate_to_home
   end
 
-  def test_sign_in
-    view('sign-in').tap do |v|
-      v.is_visible!
-      v.text_field('email').enter_text('email@example.org')
-      v.text_field('password').enter_text('password123')
-      v.action('submit').activate
-      v.is_not_visible!
+  def test_sign_in_success
+    # TODO: add code to create user, use email and password for new user
+    email = 'email@example.org'
+    password = 'password123'
+    
+    view('sign-in').tap do |sign_in|
+      sign_in.is_visible!
+      sign_in.text_field('email').enter_text(email)
+      sign_in.text_field('password').enter_text(password)
+      sign_in.action('submit').activate
+      sign_in.is_not_visible!
     end
 
     view('dashboard').is_visible!
+  end
+
+  def test_sign_in_failure_user_does_not_exist
+    email = 'does_not_exist@example.org'
+    password = 'password123'
+    
+    view('sign-in').tap do |sign_in|
+      sign_in.is_visible!
+      sign_in.text_field('email').enter_text(email)
+      sign_in.text_field('password').enter_text(password)
+      # no errors before submitting
+      sign_in.list('errors').is_not_visible!
+      sign_in.action('submit').activate
+      # should see error after submitting
+      sign_in.list('errors').row(texts: {message: 'Sign in failed.'}).is_visible!
+      # should still be on sign in page
+      sign_in.is_visible!
+    end
   end
 
 end
