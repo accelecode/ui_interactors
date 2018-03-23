@@ -20,14 +20,19 @@ module UiInteractors
         puts 'Path already exists, no action taken'
         return
       else
-        FileUtils.mkdir_p(new_project_path)
-        puts "Created path: #{new_project_path}"
+        create_new_project_path(new_project_path)
       end
 
       generate_files(new_project_path)
+      execute_bundle_install(new_project_path)
     end
 
     private
+
+    def create_new_project_path(new_project_path)
+      FileUtils.mkdir_p(new_project_path)
+      puts "Created path: #{new_project_path}"
+    end
 
     def current_path
       File.expand_path(File.dirname(__FILE__))
@@ -67,6 +72,16 @@ module UiInteractors
       new_dir_path = File.join(base_path, new_relative_path)
       FileUtils.mkdir_p(new_dir_path)
       puts "Created path: #{new_relative_path}"
+    end
+
+    def execute_bundle_install(new_project_path)
+      if `which bundle` == ''
+        puts "WARNING: Could not find `bundle` in path"
+      else
+        puts "Running bundle install in #{new_project_path}:"
+        output = `cd #{new_project_path} && bundle install`
+        puts output
+      end
     end
   end
 end
