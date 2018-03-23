@@ -15,29 +15,36 @@ module UiInteractors
     DESC
     option :app_url
     def gen(path)
-      new_project_path = File.expand_path(path)
-      puts "Using path: #{new_project_path}"
+      new_project_path = calculate_new_project_path(path)
 
-      if File.exists?(new_project_path)
-        puts 'Path already exists, no action taken'
-        return
-      else
-        create_new_project_path(new_project_path)
-      end
+      create_new_project_path(new_project_path) or return
 
       generate_files(new_project_path)
+
       execute_bundle_install(new_project_path)
     end
 
     private
+
+    def calculate_new_project_path(path)
+      new_project_path = File.expand_path(path)
+      puts "Using path: #{new_project_path}"
+      new_project_path
+    end
 
     def app_url_option
       options.fetch(:app_url, 'http://localhost:8000')
     end
 
     def create_new_project_path(new_project_path)
-      FileUtils.mkdir_p(new_project_path)
-      puts "Created path: #{new_project_path}"
+      if File.exists?(new_project_path)
+        puts 'Path already exists, no action taken'
+        false
+      else
+        FileUtils.mkdir_p(new_project_path)
+        puts "Created path: #{new_project_path}"
+        true
+      end
     end
 
     def current_path
