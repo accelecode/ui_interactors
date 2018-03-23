@@ -13,6 +13,7 @@ module UiInteractors
 
       [PATH] is the relative or absolute path where the test suite should be generated.
     DESC
+    option :app_url
     def gen(path)
       new_project_path = File.expand_path(path)
       puts "Using path: #{new_project_path}"
@@ -29,6 +30,10 @@ module UiInteractors
     end
 
     private
+
+    def app_url_option
+      options.fetch(:app_url, 'http://localhost:8000')
+    end
 
     def create_new_project_path(new_project_path)
       FileUtils.mkdir_p(new_project_path)
@@ -56,7 +61,7 @@ module UiInteractors
 
     def generate_base_test_files(new_project_path)
       create_output_path(new_project_path, 'tests')
-      generate_template(new_project_path, File.join('tests', 'base_test.rb.erb'), File.join('tests', 'base_test.rb'))
+      generate_template(new_project_path, File.join('tests', 'base_test.rb.erb'), File.join('tests', 'base_test.rb'), app_url: app_url_option)
       generate_template(new_project_path, File.join('tests', 'driver_provider.rb.erb'), File.join('tests', 'driver_provider.rb'))
       generate_template(new_project_path, File.join('tests', 'ui_steps.rb.erb'), File.join('tests', 'ui_steps.rb'))
     end
