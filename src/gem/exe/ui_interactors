@@ -7,6 +7,14 @@ require_relative File.join('..', 'lib', 'ui_interactors')
 module UiInteractors
   class CLI < Thor
 
+    desc 'version', 'Display the version of this command'
+    long_desc <<~DESC
+      Display the version of this command
+    DESC
+    def version
+      puts "Version: #{UiInteractors::VERSION}"
+    end
+
     desc 'gen [PATH]', 'Generate a new test suite'
     long_desc <<~DESC
       Generate a new test suite
