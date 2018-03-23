@@ -15,14 +15,14 @@ module UiInteractors
       puts "Version: #{UiInteractors::VERSION}"
     end
 
-    desc 'gen [PATH]', 'Generate a new test suite'
+    desc 'new [PATH]', 'Generate a new test suite'
     long_desc <<~DESC
       Generate a new test suite
 
       [PATH] is the relative or absolute path where the test suite should be generated.
     DESC
     option :app_url
-    def gen(path)
+    def new(path)
       new_project_path = calculate_new_project_path(path)
 
       create_new_project_path(new_project_path) or return
