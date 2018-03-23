@@ -7,12 +7,22 @@ class BaseTest < UiInteractors::InteractorTest
 
   def setup
     super
-    @ui_steps ||= UiSteps.new(driver, root_view)
+    @ui_steps ||= UiSteps.new(driver, root_view, reset_url, home_url)
     @ui_steps.navigate_to_reset
   end
 
   def provide_driver
     DriverProvider.instance.driver
+  end
+
+  private
+
+  def reset_url
+    'http://localhost:8000/reset.html'
+  end
+
+  def home_url
+    'http://localhost:8000/'
   end
 
 end
