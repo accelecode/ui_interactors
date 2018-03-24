@@ -2,9 +2,45 @@
 
 **UI Interactors** makes it simple to write automated browser tests using `selenium-webdriver` - tests which are resilient to `HTML` structure and style changes.
 
-## Installation
+## Getting Started
 
-Add this line to your application's Gemfile:
+There are two ways you can use this gem for testing. You can either create a test suite from scratch or integrate this gem into an existing test suite. There are pros and cons with each approach.
+
+The recommended approach is to create a new test suite from scratch. However, this may be harder when dealing with existing apps that already have a test suite and tooling for the test suite in place.
+
+### Create Test Suite From Scratch
+
+Install the gem:
+
+    $ gem install ui_interactors
+
+The gem provides a command you can use to generate a test suite similar to the `rails new` command used to create a new Rails app. Use the following command to generate a new test suite:
+
+    $ ui_interactors new [path]
+
+The generated code makes an assumption that the web app's main page is accessible at `http://localhost:8000`. You can override this default value with the `--app-url` option. Here is an example:
+
+    $ ui_interactors new awesome-test-suite --app-url=http://awesome.site:9999
+
+The command generates files that are intended to be a starting point for you to customize. The following files will be generated at the path you provide:
+
+* *.ruby-version* - the test suite uses it's own version of Ruby. Adjust this if you need to. The intention is to use the latest stable version of Ruby.
+* *Gemfile* - minimal set of gems which assume you want to use Google Chrome for your automation.
+* *Rakefile* - provides `rake test` task which will re-use the same browser instance for all tests to improve performance.
+* *base_test.rb* - provides a `minitest` base class you can use for all of your tests. You can adjust the `#setup` method to put all tests into a consistent state. For example, you might need to ensure that a the browser is signed out of the site you are testing before you start executing a test.
+* *driver_provider.rb* - Singleton class used to provide an instance of the Chrome Browser driver to the test suite.
+* *ui_steps.rb* - a utility class used to describe common actions your tests may need to perform, such as navigating to a specific page, signing in, signing out, searching for specific types of records, etc.
+* *example/test_example.rb* - an example test file which demonstrates what a typical test class might look like.
+
+Use `example/test_example.rb` as a starting point to implement your first test.
+
+If you decide to use another browser instead of Google Chrome, you will need to adjust the `Gemfile` to include the gem which provides selenium support for the browser you plan to use. You will also need to adjust the `ProvideDriver` class to use the appropriate driver.
+
+As you grow your test suite, extract common UI tasks to the `UiSteps` class. An instance of this class is available to all test classes that inherit from `BaseTest`.
+
+### Integate With Existing Test Suite
+
+A second option is to add `ui_interactors` to an existing test suite. To do that, add this line to your test suite's Gemfile (or Rails app Gemfile):
 
 ```ruby
 gem 'ui_interactors'
@@ -14,15 +50,19 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install ui_interactors
-
 ## Usage
 
 ### Overview
 
-Use **interactors** to select, interact with and test the visibility of elements. The goal of the `ui_interactors` gem is to allow you to write simple `Ruby` code like this to automate functional tests for web applications - tests that are resilient to `HTML` layout changes and `CSS` style changes:
+Use **interactors** to select, interact with and test the visibility of elements. The goal of the `ui_interactors` gem is to allow you to write simple `Ruby` code to automate functional tests for web applications - tests that are resilient to `HTML` layout changes and `CSS` style changes.
+
+The following example code does not depend on any specific test framework and includes everything that is required to:
+
+* start up the browser
+* navigate to the home page
+* verify that the user is not signed in
+* sign in
+* verify that the user sees the dashboard
 
 ```ruby
 require 'selenium-webdriver'
