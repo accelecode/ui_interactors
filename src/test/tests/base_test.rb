@@ -7,6 +7,9 @@ class BaseTest < UiInteractors::InteractorTest
 
   def setup
     super
+    home_url = 'http://localhost:8000/'
+    reset_url = 'http://localhost:8000/reset.html'
+
     @ui_steps = UiSteps.new(driver, root_view, reset_url, home_url)
     @ui_steps.navigate_to_reset
   end
@@ -16,13 +19,5 @@ class BaseTest < UiInteractors::InteractorTest
   end
 
   private
-
-  def reset_url
-    'http://localhost:8000/reset.html'
-  end
-
-  def home_url
-    'http://localhost:8000/'
-  end
 
 end
