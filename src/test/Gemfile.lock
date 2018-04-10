@@ -2,29 +2,29 @@ PATH
   remote: ../gem
   specs:
     ui_interactors (0.4.0)
-      selenium-webdriver (~> 3.5.2)
+      selenium-webdriver (~> 3.11)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    archive-zip (0.7.0)
+    archive-zip (0.11.0)
       io-like (~> 0.3.0)
-    childprocess (0.7.1)
+    childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
-    chromedriver-helper (1.1.0)
-      archive-zip (~> 0.7.0)
-      nokogiri (~> 1.6)
-    ffi (1.9.18)
+    chromedriver-helper (1.2.0)
+      archive-zip (~> 0.10)
+      nokogiri (~> 1.8)
+    ffi (1.9.23)
     io-like (0.3.0)
-    mini_portile2 (2.1.0)
-    minitest (5.10.1)
-    nokogiri (1.7.1)
-      mini_portile2 (~> 2.1.0)
-    rake (12.0.0)
+    mini_portile2 (2.3.0)
+    minitest (5.11.3)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
+    rake (12.3.1)
     rubyzip (1.2.1)
-    selenium-webdriver (3.5.2)
+    selenium-webdriver (3.11.0)
       childprocess (~> 0.5)
-      rubyzip (~> 1.0)
+      rubyzip (~> 1.2)
 
 PLATFORMS
   ruby
@@ -37,4 +37,4 @@ DEPENDENCIES
   ui_interactors!
 
 BUNDLED WITH
-   1.13.7
+   1.16.1
