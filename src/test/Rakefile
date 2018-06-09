@@ -1,18 +1,23 @@
-desc 'Start the dev server (required for `rake test`)'
+desc 'Start the http server (for convenience during development)'
 task :server do
-  # serve static files for use with test suite
+  # start the static file server
   `ruby -run -ehttpd ./site -p8000`
 end
 
 desc 'Run all tests; pattern is not required.'
 task :test, [:pattern] do |t, args|
+  # start the static file server
+  server_pid = IO.popen('ruby -run -ehttpd ./site -p8000').pid
+
   # start shared driver instance
   require_relative './tests/driver_provider'
   driver = DriverProvider.instance.driver
-  # terminate shared driver instance after tests complete
+
+  # terminate shared driver instance and static file server after tests complete
   require 'minitest'
   Minitest.after_run do
     driver.quit
+    `kill -9 #{server_pid}`
   end
 
   # register tests to execute (via Minitest#autorun) at process exit
